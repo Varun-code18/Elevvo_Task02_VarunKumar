@@ -3,145 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechnoLogia - Smart Work Solutions</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>Collapsible Sidebar</title>
+    <title>Contact Form</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
-    <header>
-        <div class="logo">TechnoLogia</div>
-        <nav>
-            <a href="#features">Features</a>
-            <a href="#testimonials">Reviews</a>
-            <a href="#pricing">Pricing</a>
-            <a href="#contact">Contact</a>
-        </nav>
-        <button id="themeToggle"><i class="fas fa-moon"></i></button>
-    </header>
-
-    <main>
-        <section class="hero">
-            <div class="hero-content">
-                <h1>Your Work, Smarter with TechnoLogia</h1>
-                <p>Designed for Pakistani professionals and businesses</p>
-                <div class="hero-buttons">
-                    <a href="#pricing" class="btn primary">View Plans</a>
-                    <a href="#features" class="btn secondary">Learn More</a>
-                </div>
+    <div class="sidebar" id="sidebar">
+        <div class="logo">AppLogo</div>
+        <ul class="nav-list">
+            <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#"><i class="fas fa-user"></i> About</a></li>
+            <li><a href="#"><i class="fas fa-gear"></i> Services</a></li>
+            <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <button class="menu-toggle" onclick="toggleSidebar()">☰</button>
+        <h1>Welcome to My Sidebar</h1>
+        <p>Click the menu icon to toggle the sidebar!</p>
+    <div class="form-box">
+        <h2>Reach Out</h2>
+        <form id="contact-form">
+            <div class="input-group">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" required>
+                <div class="error-message" id="name-error">Name is required</div>
             </div>
-            <div class="hero-icon">
-                <i class="fas fa-laptop-code"></i>
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+                <div class="error-message" id="email-error">Valid email is required</div>
             </div>
-        </section>
-
-        <section id="features">
-            <h2>Why Choose TechnoLogia?</h2>
-            <div class="features">
-                <div class="feature">
-                    <i class="fas fa-clock"></i>
-                    <h3>Time Saving</h3>
-                    <p>Automate routine tasks</p>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-rupee-sign"></i>
-                    <h3>Cost Effective</h3>
-                    <p>Affordable for Pakistani budgets</p>
-                </div>
-                <div class="feature">
-                    <i class="fas fa-cloud"></i>
-                    <h3>Cloud Based</h3>
-                    <p>Access from anywhere</p>
-                </div>
+            <div class="input-group">
+                <label for="subject">Subject</label>
+                <input type="text" id="subject" name="subject" required>
+                <div class="error-message" id="subject-error">Subject is required</div>
             </div>
-        </section>
-
-        <section id="testimonials">
-            <h2>What Our Users Say</h2>
-            <div class="testimonials">
-                <div class="testimonial">
-                    <div class="rating">★★★★★</div>
-                    <p>"Cut our admin work by half!"</p>
-                    <div class="reviewer"><i class="fas fa-user"></i> Ahmed R., Karachi</div>
-                </div>
-                <div class="testimonial">
-                    <div class="rating">★★★★☆</div>
-                    <p>"Perfect for my small business"</p>
-                    <div class="reviewer"><i class="fas fa-user"></i> Sana F., Lahore</div>
-                </div>
+            <div class="input-group">
+                <label for="message">Your Message (max 500 characters)</label>
+                <textarea id="message" name="message" required></textarea>
+                <div class="char-count" id="char-count">0/500</div>
+                <div class="error-message" id="message-error">Message is required</div>
             </div>
-        </section>
-
-        <section id="pricing">
-            <h2>Simple Pricing Plans</h2>
-            <p class="subtitle">All prices in Pakistani Rupees</p>
-            <div class="pricing">
-                <div class="plan">
-                    <h3>Starter</h3>
-                    <div class="price">PKR 1,299<span>/month</span></div>
-                    <ul>
-                        <li><i class="fas fa-check"></i> 5 Projects</li>
-                        <li><i class="fas fa-check"></i> Basic Reports</li>
-                        <li><i class="fas fa-check"></i> Email Support</li>
-                    </ul>
-                    <a href="#" class="btn">Get Started</a>
-                </div>
-                <div class="plan popular">
-                    <div class="badge">Popular</div>
-                    <h3>Business</h3>
-                    <div class="price">PKR 3,999<span>/month</span></div>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Unlimited Projects</li>
-                        <li><i class="fas fa-check"></i> Advanced Analytics</li>
-                        <li><i class="fas fa-check"></i> Priority Support</li>
-                    </ul>
-                    <a href="#" class="btn primary">Choose Plan</a>
-                </div>
-                <div class="plan">
-                    <h3>Enterprise</h3>
-                    <div class="price">PKR 8,499<span>/month</span></div>
-                    <ul>
-                        <li><i class="fas fa-check"></i> Everything in Business</li>
-                        <li><i class="fas fa-check"></i> Dedicated Manager</li>
-                        <li><i class="fas fa-check"></i> 24/7 Support</li>
-                    </ul>
-                    <a href="#" class="btn">Contact Sales</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="contact">
-            <h2>Have Questions?</h2>
-            <form class="contact-form">
-                <input type="text" placeholder="Your Name" required>
-                <input type="email" placeholder="Email" required>
-                <textarea placeholder="Your Message" required></textarea>
-                <button type="submit" class="btn primary">Send Message</button>
-            </form>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <div class="footer-about">
-                <h3>TechnoLogia</h3>
-                <p>Making technology work for Pakistan</p>
-            </div>
-            <div class="footer-links">
-                <a href="#features">Features</a>
-                <a href="#pricing">Pricing</a>
-                <a href="#contact">Contact</a>
-            </div>
-            <div class="footer-social">
-                <a href="#"><i class="fab fa-facebook"></i></a>
-                <a href="#"><i class="fab fa-twitter"></i></a>
-                <a href="#"><i class="fab fa-linkedin"></i></a>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            &copy; 2023 TechnoLogia. All rights reserved.
-        </div>
-    </footer>
-
+            <button type="submit" class="send-button" id="send-button">Send</button>
+        </form>
+    </div>
+    <div class="notification" id="notification"></div>
     <script src="script.js"></script>
 </body>
 </html>
