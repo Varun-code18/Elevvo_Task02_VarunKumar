@@ -1,56 +1,79 @@
-const themeToggle = document.getElementById('themeToggle');
-const icon = themeToggle.querySelector('i');
+function toggleSidebar() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('open');
+    console.log("Sidebar toggled, classes:", sidebar.classList); // Debug log
+}
+const form = document.getElementById('contact-form');
+const sendButton = document.getElementById('send-button');
+const notification = document.getElementById('notification');
+const messageInput = document.getElementById('message');
+const charCount = document.getElementById('char-count');
 
-if (localStorage.getItem('theme') === 'dark') {
-    document.body.classList.add('dark-mode');
-    icon.classList.replace('fa-moon', 'fa-sun');
+messageInput.addEventListener('input', function() {
+    const max = 500;
+    const count = this.value.length;
+    charCount.textContent = `${count}/${max}`;
+    charCount.style.color = count > max ? '#e74c3c' : '#444';
+});
+
+function showNotification(message, type) {
+    notification.textContent = message;
+    notification.className = `notification ${type}`;
+    notification.style.display = 'block';
+    setTimeout(() => {
+        notification.style.display = 'none';
+    }, 3000);
 }
 
-themeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    if (document.body.classList.contains('dark-mode')) {
-        localStorage.setItem('theme', 'dark');
-        icon.classList.replace('fa-moon', 'fa-sun');
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    document.querySelectorAll('.error-message').forEach(error => {
+        error.style.display = 'none';
+    });
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const subject = document.getElementById('subject').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    let isValid = true;
+
+    if (!name) {
+        document.getElementById('name-error').style.display = 'block';
+        isValid = false;
+    }
+
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!email || !emailPattern.test(email)) {
+        document.getElementById('email-error').style.display = 'block';
+        isValid = false;
+    }
+
+    if (!subject) {
+        document.getElementById('subject-error').style.display = 'block';
+        isValid = false;
+    }
+
+    if (!message) {
+        document.getElementById('message-error').style.display = 'block';
+        isValid = false;
+    } else if (message.length > 500) {
+        document.getElementById('message-error').textContent = 'Message too long (max 500)';
+        document.getElementById('message-error').style.display = 'block';
+        isValid = false;
+    }
+
+    if (isValid) {
+        sendButton.disabled = true;
+        sendButton.textContent = 'Sending...';
+        setTimeout(() => {
+            showNotification('Message sent!', 'success');
+            form.reset();
+            charCount.textContent = '0/500';
+            sendButton.disabled = false;
+            sendButton.textContent = 'Send';
+        }, 1000);
     } else {
-        localStorage.setItem('theme', 'light');
-        icon.classList.replace('fa-sun', 'fa-moon');
+        showNotification('Please check the form', 'error');
     }
 });
-
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: 'smooth'
-        });
-    });
-});
-
-const contactForm = document.querySelector('.contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        alert('Thank you for your message! We will contact you soon.');
-        contactForm.reset();
-    });
-}
-
-const animateOnScroll = () => {
-    document.querySelectorAll('.feature, .plan, .testimonial').forEach(el => {
-        if (el.getBoundingClientRect().top < window.innerHeight - 100) {
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-        }
-    });
-};
-
-window.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.feature, .plan, .testimonial').forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'all 0.5s ease';
-    });
-    animateOnScroll();
-});
-
-window.addEventListener('scroll', animateOnScroll);
